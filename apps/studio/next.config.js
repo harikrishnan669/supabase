@@ -280,7 +280,7 @@ const nextConfig = {
             value: 'computeInstance',
           },
         ],
-        destination: '/project/:ref/settings/addons?panel=computeInstance',
+        destination: '/project/:ref/settings/compute-and-disk',
         permanent: true,
       },
       {
@@ -381,11 +381,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/project/:ref/sql',
-        destination: '/project/:ref/sql/new',
-        permanent: true,
-      },
-      {
         permanent: true,
         source: '/project/:ref/reports/linter',
         destination: '/project/:ref/database/linter',
@@ -465,6 +460,12 @@ const nextConfig = {
         source: '/project/:ref/settings/functions',
         destination: '/project/:ref/functions/secrets',
       },
+      {
+        source: '/org/:slug/invoices',
+        destination: '/org/:slug/billing#invoices',
+        permanent: true,
+      },
+
       ...(process.env.NEXT_PUBLIC_BASE_PATH?.length
         ? [
             {
@@ -523,6 +524,10 @@ const nextConfig = {
       {
         source: '/favicon/:slug*',
         headers: [{ key: 'cache-control', value: 'public, max-age=86400' }],
+      },
+      {
+        source: '/(.*).ts',
+        headers: [{ key: 'content-type', value: 'text/typescript' }],
       },
     ]
   },
